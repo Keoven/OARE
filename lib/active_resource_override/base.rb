@@ -4,6 +4,10 @@ module Oare
       @associations ||= []
       class_name = options[:class_name] || association_id.to_s.singularize.camelize
       @associations << class_name.constantize
+      define_method(association_id) do |*args|
+        resource = find_or_create_resource_for_collection(class_name)
+        resource.reload
+      end
     end
 
     def connection(refresh = true)

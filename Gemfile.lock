@@ -1,0 +1,25 @@
+PATH
+  remote: .
+  specs:
+    oare (0.1.0)
+      activeresource (~> 3.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activemodel (3.0.7)
+      activesupport (= 3.0.7)
+      builder (~> 2.1.2)
+      i18n (~> 0.5.0)
+    activeresource (3.0.7)
+      activemodel (= 3.0.7)
+      activesupport (= 3.0.7)
+    activesupport (3.0.7)
+    builder (2.1.2)
+    i18n (0.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  oare!

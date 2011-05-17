@@ -1,4 +1,4 @@
-module Ore
+module Oare
 end
 
 if defined?(Rails) && Rails::VERSION::MAJOR == 3

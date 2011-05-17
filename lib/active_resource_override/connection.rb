@@ -1,6 +1,6 @@
 class NilAccessToken < Exception; end
 
-class Ore::Connection < ActiveResource::Connection
+class Oare::Connection < ActiveResource::Connection
   attr_reader   :access_token
 
   def initialize(token, format = ActiveResource::Formats::XmlFormat)

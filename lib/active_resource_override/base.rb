@@ -1,4 +1,4 @@
-module Ore
+module Oare
   module Resource
     def has_many(association_id, options = {})
       @associations ||= []
@@ -11,7 +11,7 @@ module Ore
         model_constant.access_token = self.access_token
       end if @associations
 
-      @connection = Ore::Connection.new(self.access_token) if @connection.nil? || refresh
+      @connection = Oare::Connection.new(self.access_token) if @connection.nil? || refresh
       @connection.timeout = timeout if timeout
       @connection
     end
@@ -60,7 +60,7 @@ class ActiveResource::Base
     def requires_oauth
       # Extend ActiveResource with this Module
       #
-      extend Ore::Resource
+      extend Oare::Resource
       self.oauth_enabled_classes ||= {}
       class_name = self.to_s.split('::')
       key        = class_name[-1].underscore.to_sym

@@ -2,6 +2,12 @@ module Oare::Resource
   def self.included(base)
     base.instance_eval <<-RUBY
 
+      alias_method :original_update_attributes, :update_attributes
+      undef_method :update_attributes
+      define_method :update_attributes do |attributes, options = {}, query_options = nil|
+        load(attributes) && save(options, query_options)
+      end
+
       alias_method :original_save, :save
       undef_method :save
       define_method :save do |options = {}, query_options = nil|

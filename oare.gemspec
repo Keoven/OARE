@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   ## Basic Information
   #
   s.name     = 'oare'
-  s.version  = '0.1.7'
+  s.version  = '0.1.8'
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version     = '~> 1.9'
   s.required_rubygems_version = '>= 1.3.6'

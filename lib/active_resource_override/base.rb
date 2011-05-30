@@ -184,7 +184,7 @@ module Oare::Resource
       path = path_options.delete(:path)
       prefix_options = path_options
       return collection_path(id, prefix_options, query_options) unless path
-      "/#{path}/#{URI.escape id.to_s}.#{format.extension}#{query_string(query_options)}"
+      "/#{path}.#{format.extension}#{query_string(query_options)}"
     end
 
   end # Class Methods

@@ -183,7 +183,7 @@ module Oare::Resource
     def update_path(id, path_options = {}, query_options = nil)
       path = path_options.delete(:path)
       prefix_options = path_options
-      return collection_path(id, prefix_options, query_options) unless path
+      return element_path(id, prefix_options, query_options) unless path
       "/#{path}.#{format.extension}#{query_string(query_options)}"
     end
 

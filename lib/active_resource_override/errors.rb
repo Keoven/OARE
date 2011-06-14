@@ -2,13 +2,14 @@ class Oare::Errors < ActiveResource::Errors
   def from_array(messages, save_cache = false)
     clear unless save_cache
     humanized_nested_attributes = @base.nested_attributes_values.map do |model, v|
+      next if v.blank?
       v.map do |i, v2|
         v2.keys.map do |k|
           attribute_name = "#{model.gsub('_attributes','')}_#{k}".underscore
           [attribute_name.humanize, attribute_name]
         end
       end
-    end.flatten
+    end.flatten.compact
     humanized_nested_attributes = Hash[*humanized_nested_attributes]
 
     humanized_attributes = @base.attributes.keys.inject({}) { |h, attr_name| h.update(attr_name.humanize => attr_name) }

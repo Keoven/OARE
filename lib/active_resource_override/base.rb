@@ -74,8 +74,9 @@ module Oare::Resource
   module InstanceMethods
     attr_accessor :nested_attributes_values
 
-    def initialize(attributes = {})
+    def initialize(attributes = {}, persisted = false)
       @nested_attributes_values ||= {}
+      @persisted = persisted
       self.class.instance_variable_get(:@nested_attributes).each do |key, value|
         @nested_attributes_values[key] = collection = attributes.delete(key)
         next unless collection

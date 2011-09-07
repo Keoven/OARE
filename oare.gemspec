@@ -33,7 +33,8 @@ Gem::Specification.new do |s|
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ['lib']
 
-  ## Dependenciew
+  ## Dependency
   #
   s.add_dependency 'activeresource', '~> 3.1'
+  s.add_development_dependency 'rdoc'
 end

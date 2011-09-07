@@ -1,31 +1,21 @@
-require 'rubygems'
 require 'rake'
 require 'rake/clean'
-require 'rake/gempackagetask'
-require 'rake/testtask'
-require 'rake/rdoctask'
 
+require 'rubygems'
+require 'rubygems/package_task'
 
-desc 'Default: run unit tests.'
-task :default => :test
-
-desc 'Test the ore plugin.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
-end
+gem 'rdoc'
+require 'rdoc/task'
 
 desc 'Generate documentation for the ore plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
+RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Ore'
+  rdoc.title    = 'OAuth Active Resource Extension'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
 spec = Gem::Specification.load(Dir['*.gemspec'].first)
-package = Rake::GemPackageTask.new(spec)
+package = Gem::PackageTask.new(spec)
 package.define

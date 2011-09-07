@@ -21,9 +21,11 @@ GEM
     builder (3.0.0)
     i18n (0.6.0)
     multi_json (1.0.3)
+    rdoc (3.9.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   oare!
+  rdoc

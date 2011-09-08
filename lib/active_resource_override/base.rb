@@ -1,6 +1,10 @@
 module Oare::Resource
   def self.included(base)
-    base.instance_eval <<-RUBY
+    base.instance_eval do
+
+      def mock(attributes = {})
+        self.new(attributes, true)
+      end
 
       alias_method :original_update_attributes, :update_attributes
       undef_method :update_attributes
@@ -63,8 +67,7 @@ module Oare::Resource
           load_attributes_from_response(response)
         end
       end
-
-    RUBY
+    end
 
     base.send(:include, InstanceMethods)
     base.extend(ClassMethods)
@@ -75,8 +78,11 @@ module Oare::Resource
     attr_accessor :nested_attributes_values
 
     def initialize(attributes = {}, persisted = false)
+      @attributes     = {}.with_indifferent_access
+      @prefix_options = {}
+      @persisted      = persisted
+
       @nested_attributes_values ||= {}
-      @persisted = persisted
       self.class.instance_variable_get(:@nested_attributes).each do |key, value|
         @nested_attributes_values[key] = collection = attributes.delete(key)
         next unless collection
@@ -131,7 +137,12 @@ module Oare::Resource
         current_value = instance_variable_get("@#{association_id}".to_sym)
         return current_value if current_value
 
-        resource = find_or_create_resource_for_collection(class_name)
+        begin
+          resource = class_name.constantize
+        rescue
+          resource = find_or_create_resource_for_collection(class_name)
+        end
+
         value = if self.new_record? then [resource.new]
           else
           # TODO:
